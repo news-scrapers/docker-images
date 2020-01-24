@@ -1,0 +1,35 @@
+version: '2.1'
+
+volumes:
+    db-mongo:
+    backend-rest:
+    news-scraper-workers-go:
+
+networks:
+    my-network:
+        external: true
+
+services:
+    db-mongo:
+        image: mongo
+        restart: on-failure
+        ports:
+            - "127.0.0.1:27017:27017"
+        networks:
+            -  my-network
+    backend-rest:
+        image: backend-rest
+        ports:
+            - "8001:8001"
+        restart: on-failure
+        env_file:
+            - .env
+        networks:
+            -  my-network
+    news-scraper-workers-go:
+        image: news-scraper-workers-go
+        restart: on-failure
+        env_file:
+            - .env
+        networks:
+            -  my-network
