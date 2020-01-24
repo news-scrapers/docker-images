@@ -14,11 +14,13 @@ services:
         image: mongo
         restart: on-failure
         ports:
-            - "127.0.0.1:27017:27017"
+            - "27017:27017"
         networks:
             -  my-network
         entrypoint: 
             "mongod --bind_ip_all"
+        expose: 
+            "27017"
     backend-rest:
         image: backend-rest
         ports:
