@@ -17,6 +17,8 @@ services:
             - "127.0.0.1:27017:27017"
         networks:
             -  my-network
+        entrypoint: 
+            "mongod --bind_ip_all"
     backend-rest:
         image: backend-rest
         ports:
