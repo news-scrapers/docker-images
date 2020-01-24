@@ -12,7 +12,7 @@ networks:
 services:
     db-mongo:
         image: mongo
-        restart: on-failure
+        restart: always
         ports:
             - "27017:27017"
         hostname:
@@ -26,14 +26,14 @@ services:
         image: backend-rest
         ports:
             - "8002:8002"
-        restart: on-failure
+        restart: always
         env_file:
             - .env
         networks:
             -  my-network
     news-scraper-workers-go:
         image: news-scraper-workers-go
-        restart: on-failure
+        restart: always
         env_file:
             - .env
         networks:
